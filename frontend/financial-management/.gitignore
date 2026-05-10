@@ -1,0 +1,109 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.env
+
+
+# ==================================
+# Python
+# ==================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.spec
+
+# Byte-compiled / optimized / DLL files
+*.dll
+*.dylib
+
+# ==================================
+# Virtual environments
+# ==================================
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# ==================================
+# Logs & Debug
+# ==================================
+*.log
+*.out
+*.err
+
+# ==================================
+# Jupyter Notebooks
+# ==================================
+.ipynb_checkpoints/
+*.ipynb_save
+
+# ==================================
+# IDE / Editor settings
+# ==================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==================================
+# OS specific
+# ==================================
+.DS_Store
+Thumbs.db
+
+# ==================================
+# Project specific (FinancialApp)
+# ==================================
+/data/               # dữ liệu tải về
+/secrets/            # thư mục chứa key, credential
+config.json          # config có thể chứa key
+.env                 # biến môi trường
+*.sqlite3            # database tạm
+*.db
+*.pdf
+*.xlsx
+*.csv
+*.pkl
+*.parquet
+
+# ==================================
+# Testing / Coverage
+# ==================================
+htmlcov/
+.coverage
+.cache
+.pytest_cache/
+
+*.lock
+*.toml
+finance_chatbot/test/
+finance_chatbot/manual_test_tools.py
+finance_chatbot/test_new_tools.py

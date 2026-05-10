@@ -1,0 +1,78 @@
+# ==================================
+# Python
+# ==================================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.spec
+
+# Byte-compiled / optimized / DLL files
+*.dll
+*.dylib
+
+# ==================================
+# Virtual environments
+# ==================================
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# ==================================
+# Logs & Debug
+# ==================================
+*.log
+*.out
+*.err
+
+# ==================================
+# Jupyter Notebooks
+# ==================================
+.ipynb_checkpoints/
+*.ipynb_save
+
+# ==================================
+# IDE / Editor settings
+# ==================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==================================
+# OS specific
+# ==================================
+.DS_Store
+Thumbs.db
+
+# ==================================
+# Project specific (FinancialApp)
+# ==================================
+/data/               # dữ liệu tải về
+/secrets/            # thư mục chứa key, credential
+config.json          # config có thể chứa key
+.env                 # biến môi trường
+*.sqlite3            # database tạm
+*.db
+*.pdf
+*.xlsx
+*.csv
+*.pkl
+*.parquet
+
+# ==================================
+# Testing / Coverage
+# ==================================
+htmlcov/
+.coverage
+.cache
+.pytest_cache/
+
+.env

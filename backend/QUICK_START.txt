@@ -1,0 +1,64 @@
+========================================
+  FILL ALL OHLCV DATA - QUICK START
+========================================
+
+⚠️  fill_gaps.js bị crash ở "check gaps"
+✅  Dùng fill_all_simple.js - KHÔNG check
+
+Câu hỏi:
+1. Có tránh trùng không? → YES (ON CONFLICT)
+2. Sao chỉ 100 assets?  → FIXED (xử lý 6,621)
+3. File checkpoint đâu?  → Có từ đầu!
+
+========================================
+  CHẠY NGAY
+========================================
+
+cd G:\DATN\mergeFE\our-final-project\backend
+
+node jobs/fill_all_simple.js
+
+
+========================================
+  KHI BỊ "out of shared memory"
+========================================
+
+PostgreSQL crash → Tự động restart
+
+Chỉ cần chạy lại:
+  node jobs/fill_all_simple.js
+
+Script tự động resume từ checkpoint!
+
+
+========================================
+  CHECKPOINT TỰ ĐỘNG
+========================================
+
+File: logs/fill_progress.txt
+
+Lưu mỗi 10 assets → Safe to stop/resume
+
+
+========================================
+  TIME
+========================================
+
+~3.5 giờ cho 6,621 assets
+(có thể chạy overnight)
+
+
+========================================
+  SAU KHI XONG
+========================================
+
+npm run dev
+
+→ Daily sync tự động chạy (1 AM, 5:30 PM)
+
+
+========================================
+  DOCUMENTATION
+========================================
+
+Chi tiết: SIMPLE_GUIDE.md
