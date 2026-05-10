@@ -18,12 +18,6 @@ export const SIDE_MENU_DATA = [
     path: "/expense",
   },
   {
-    id: "04",
-    label: "Tin tức",
-    icon: "fa-solid fa-newspaper",
-    path: "/news",
-  },
-  {
     id: "06",
     label: "Đăng xuất",
     icon: "fa-solid fa-right-from-bracket",
