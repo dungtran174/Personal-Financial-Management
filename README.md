@@ -82,3 +82,23 @@ Quá trình này diễn ra tự động qua luồng (Flow) sau:
   |--> `[Thực thi hàm PFM]` 
   |<-- `[Trả kết quả Streaming]`
 `[User UI nhận SSE Stream & Hiển thị]`
+
+---
+
+## PHẦN 4: PHẠM VI TRẢ LỜI VÀ TƯ VẤN CỦA AI (AI SCOPE & ADVISORY)
+
+Một điểm sáng của hệ thống là khả năng linh hoạt trong giao tiếp của AI, không chỉ giới hạn ở việc "gọi hàm" (Function Calling) để thêm/xóa dữ liệu.
+
+### 1. Xử lý các câu hỏi không liên quan (Out-of-domain)
+Bởi vì "bộ não" cốt lõi của Agent là một Mô hình Ngôn ngữ Lớn (LLM - Gemini), nó sở hữu lượng kiến thức tổng hợp khổng lồ.
+*   **Có trả lời được không?** Có. Nếu người dùng hỏi những câu như *"Thời tiết hôm nay thế nào?"* hay *"Làm sao để nấu món phở?"*, hệ thống vẫn có thể đưa ra câu trả lời dựa trên kiến thức chung của LLM.
+*   **Cơ chế:** Khi nhận câu hỏi này, bước "Tìm Tool" (Routing) sẽ trả về danh sách rỗng (do không có keyword tài chính nào khớp). Agent sẽ tự động chuyển sang chế độ "Trò chuyện thông thường" (Chit-chat mode) và trả lời như một chatbot tiêu chuẩn (như ChatGPT).
+
+### 2. Tư vấn tài chính và Gợi ý (Financial Advisory)
+Đây là tính năng "Trợ lý chuyên sâu" nhờ sự kết hợp giữa kiến thức nền của LLM và dữ liệu người dùng.
+*   **Ví dụ:** Khi người dùng hỏi *"Tôi có nên mua iPhone 15 lúc này không?"*
+*   **Cách AI phản hồi:**
+    1.  Nó sẽ không trả lời "Có" hay "Không" một cách bừa bãi.
+    2.  Nó có thể tự động kiểm tra `Số dư hiện tại` và `Biểu đồ chi tiêu` trong tháng của bạn (thông qua Tool `pfm_get_financial_summary`).
+    3.  Từ dữ liệu đó, AI sẽ đóng vai trò như một cố vấn tài chính: *"Hiện tại số dư của bạn chỉ còn 10 triệu, trong khi chi tiêu cho ăn uống tháng này đã vượt mức. iPhone 15 có giá khoảng 20 triệu. Tôi khuyên bạn nên hoãn lại hoặc tiết kiệm thêm 2 tháng nữa."*
+*   **Bản chất:** AI sử dụng **Khả năng suy luận (Reasoning)** để kết hợp dữ liệu cá nhân hóa (Personal Data) với kiến thức quản lý tài chính chung (General Knowledge) để đưa ra lời khuyên thực tế nhất.
