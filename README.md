@@ -102,3 +102,29 @@ Bởi vì "bộ não" cốt lõi của Agent là một Mô hình Ngôn ngữ L�
     2.  Nó có thể tự động kiểm tra `Số dư hiện tại` và `Biểu đồ chi tiêu` trong tháng của bạn (thông qua Tool `pfm_get_financial_summary`).
     3.  Từ dữ liệu đó, AI sẽ đóng vai trò như một cố vấn tài chính: *"Hiện tại số dư của bạn chỉ còn 10 triệu, trong khi chi tiêu cho ăn uống tháng này đã vượt mức. iPhone 15 có giá khoảng 20 triệu. Tôi khuyên bạn nên hoãn lại hoặc tiết kiệm thêm 2 tháng nữa."*
 *   **Bản chất:** AI sử dụng **Khả năng suy luận (Reasoning)** để kết hợp dữ liệu cá nhân hóa (Personal Data) với kiến thức quản lý tài chính chung (General Knowledge) để đưa ra lời khuyên thực tế nhất.
+
+---
+
+## PHẦN 5: CÁC KỸ THUẬT TỐI ƯU HÓA HỆ THỐNG (OPTIMIZATIONS)
+
+Để đảm bảo hệ thống chạy nhanh và tiết kiệm chi phí API (Token), dự án áp dụng các kỹ thuật sau:
+
+### 1. Dynamic Tool Filtering (Lọc công cụ động bằng Heuristic)
+Đây là kỹ thuật quan trọng nhất để tiết kiệm Token. Thông thường, việc gửi mô tả của 20-30 công cụ cho mỗi câu hỏi sẽ tốn rất nhiều Token đầu vào.
+*   **Giải pháp:** Hệ thống thực hiện một bước quét từ khóa (Keyword Scanning) trước khi gọi LLM. 
+*   **Ví dụ:** Nếu người dùng hỏi về "số dư", hệ thống chỉ gửi mô tả của `pfm_get_financial_summary`. Các mô tả về "thị trường chứng khoán" hay "crypto" sẽ bị loại bỏ khỏi Prompt.
+*   **Kết quả:** Giảm **70% phí Token** cho mỗi lượt truy vấn thông thường.
+
+### 2. Conversation History Windowing (Cửa sổ lịch sử)
+Hệ thống không gửi toàn bộ lịch sử chat từ đầu đến cuối phiên làm việc.
+*   **Cơ chế:** Chỉ giữ lại **10 lượt trao đổi gần nhất** (Sliding Window).
+*   **Lợi ích:** Đảm bảo độ dài Prompt luôn ổn định, không bị "phình" to dẫn đến chậm và tốn kém khi hội thoại kéo dài.
+
+### 3. Sub-question Decomposition (Chia nhỏ bài toán)
+Thay vì để AI tự bơi trong một câu hỏi phức tạp, Agent chia nhỏ nó thành các câu hỏi phụ (Sub-questions).
+*   **Lợi ích:** AI xử lý từng phần nhỏ cực kỳ nhanh và chính xác, tránh việc AI bị "lú" hoặc trả lời sai phải thực hiện lại (gây lãng phí Token).
+
+### 4. Lazy Loading AI Agent
+Máy chủ AI được thiết lập ở chế độ `lazy_load=True`.
+*   **Cơ chế:** Chỉ khi người dùng thực sự gửi tin nhắn đầu tiên, các module nặng của AI mới được nạp vào bộ nhớ. 
+*   **Lợi ích:** Tiết kiệm RAM và tài nguyên máy chủ khi hệ thống ở trạng thái chờ.
